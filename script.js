@@ -39,10 +39,10 @@ fetch('./heart.svg')
       // Clone the SVG
       const clonedSVG = svgElement.cloneNode(true);
 
-      // Get SVG viewBox or dimensions
-      const viewBox = svgElement.viewBox.baseVal;
-      const svgWidth = viewBox.width || svgElement.width.baseVal.value;
-      const svgHeight = viewBox.height || svgElement.height.baseVal.value;
+      // Get the actual bounding box of the heart content (not the viewBox which has lots of padding)
+      const bbox = svgElement.getBBox();
+      const svgWidth = bbox.width;
+      const svgHeight = bbox.height;
       const svgAspectRatio = svgWidth / svgHeight;
 
       // Calculate dimensions to fit the heart in the center while maintaining aspect ratio
@@ -51,11 +51,11 @@ fetch('./heart.svg')
 
       if (svgAspectRatio > targetAspectRatio) {
         // SVG is wider than target
-        scaledWidth = width * 0.6; // 0.6 for padding
+        scaledWidth = width * 0.8; // 0.8 for some padding
         scaledHeight = scaledWidth / svgAspectRatio;
       } else {
         // SVG is taller than target
-        scaledHeight = height * 0.6; // 0.6 for padding
+        scaledHeight = height * 0.8; // 0.8 for some padding
         scaledWidth = scaledHeight * svgAspectRatio;
       }
 
@@ -63,6 +63,8 @@ fetch('./heart.svg')
       const x = (width - scaledWidth) / 2;
       const y = (height - scaledHeight) / 2;
 
+      // Update the viewBox to match the actual content bounds (removes extra padding)
+      clonedSVG.setAttribute('viewBox', `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`);
       // Set the SVG to render at the exact scaled size for maximum quality
       clonedSVG.setAttribute('width', scaledWidth);
       clonedSVG.setAttribute('height', scaledHeight);
