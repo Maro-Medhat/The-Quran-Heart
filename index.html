@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="ar"> 
+<html lang="ar">
 
 <head>
   <meta charset="UTF-8">
   <title>Quran Heart</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Tajawal:wght@400;500;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -12,6 +17,23 @@
 
   <div class="container" id="svg-container">
     <!-- SVG will be injected here -->
+  </div>
+
+  <!-- Statistics Panel -->
+  <div class="stats-container">
+    <div class="stat-row">
+      <span class="stat-label">تم حفظ:</span>
+      <span id="stat-completed" class="stat-value">0</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">المتبقي:</span>
+      <span id="stat-remaining" class="stat-value">114</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div id="stat-progress-bar" class="progress-bar-fill"></div>
+    </div>
+    <div class="stat-percentage" id="stat-percentage">0%</div>
+    <button id="reset-progress" class="reset-btn" title="Reset All Progress">إعادة ضبط</button>
   </div>
 
   <!-- Download Buttons -->
@@ -36,6 +58,34 @@
         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="16 18 22 12 16 6"></polyline>
         <polyline points="8 6 2 12 8 18"></polyline>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Zoom Controls -->
+  <div class="zoom-controls">
+    <button id="zoom-in" class="zoom-btn" title="Zoom In">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        <line x1="11" y1="8" x2="11" y2="14"></line>
+        <line x1="8" y1="11" x2="14" y2="11"></line>
+      </svg>
+    </button>
+    <button id="zoom-out" class="zoom-btn" title="Zoom Out">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        <line x1="8" y1="11" x2="14" y2="11"></line>
+      </svg>
+    </button>
+    <button id="zoom-reset" class="zoom-btn" title="Reset Zoom">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+        <path d="M3 3v5h5"></path>
       </svg>
     </button>
   </div>

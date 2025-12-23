@@ -6,12 +6,105 @@
 }
 
 /* Page background */
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
   background-color: #222831;
-  font-family: Arial, sans-serif;
+  font-family: "Tajawal", "Cairo", Arial, sans-serif;
   overflow: hidden;
+}
+
+/* Statistics Panel */
+.stats-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: rgba(34, 40, 49, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  z-index: 100;
+  width: 220px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  font-family: "Tajawal", sans-serif;
+  direction: rtl;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.stat-label {
+  color: #eeeeee;
+  font-weight: 500;
+}
+
+.stat-value {
+  color: #e63946;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 15px;
+  margin-bottom: 8px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background-color: #e63946;
+  border-radius: 4px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-percentage {
+  text-align: center;
+  font-size: 13px;
+  color: #aaaaaa;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.reset-btn {
+  width: 100%;
+  padding: 8px;
+  background-color: rgba(230, 57, 70, 0.15);
+  border: 1px solid rgba(230, 57, 70, 0.3);
+  border-radius: 6px;
+  color: #ffadb3;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.reset-btn:hover {
+  background-color: rgba(230, 57, 70, 0.3);
+  border-color: rgba(230, 57, 70, 0.5);
+  color: #ffffff;
+}
+
+/* Responsive stats */
+@media (max-width: 768px) {
+  .stats-container {
+    width: 180px;
+    padding: 15px;
+    top: 15px;
+    right: 15px;
+  }
 }
 
 /* Center SVG */
@@ -41,23 +134,16 @@ svg {
 /* On click */
 .section.active {
   fill: #e63946;
+  filter: drop-shadow(0 0 8px rgba(230, 57, 70, 0.6));
 }
 
-.section {
-  fill: #ffffff;
-  cursor: pointer;
-  transition: fill 0.25s ease;
-}
-
-/* لون الباث لما يتفعل */
-.section.active {
-  fill: #e63946;
-}
+/* Sections Styles merged above */
 
 /* شكل التيكست */
 .section-text {
   fill: #000000;
   font-size: 14px;
+  font-family: "Cairo", sans-serif;
   font-weight: bold;
   pointer-events: none;
   user-select: none;
@@ -111,6 +197,51 @@ svg {
   color: #ffffff;
   width: 24px;
   height: 24px;
+}
+
+/* Zoom Controls */
+.zoom-controls {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 100;
+}
+
+.zoom-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: rgba(34, 40, 49, 0.85);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  color: #fff;
+}
+
+.zoom-btn:hover {
+  background-color: rgba(34, 40, 49, 0.95);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.zoom-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.zoom-btn svg {
+  width: 24px;
+  height: 24px;
+  color: #ffffff;
 }
 
 /* Modal */
@@ -223,7 +354,14 @@ svg {
     gap: 10px;
   }
 
-  .download-btn {
+  .zoom-controls {
+    bottom: 15px;
+    right: 15px;
+    gap: 10px;
+  }
+
+  .download-btn,
+  .zoom-btn {
     width: 45px;
     height: 45px;
   }
@@ -238,4 +376,3 @@ svg {
     width: 85%;
   }
 }
-
