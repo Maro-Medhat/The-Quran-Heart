@@ -16,6 +16,54 @@ fetch('./heart.svg')
       weak: document.getElementById('level-weak')
     };
 
+    // Save state to localStorage
+    function saveState() {
+      const state = {};
+      groups.forEach(group => {
+        const paths = group.querySelectorAll('.section');
+        if (paths.length > 0) {
+          const path = paths[0];
+          const id = path.id;
+          if (id) {
+            const classes = [];
+            if (path.classList.contains('level-good')) classes.push('level-good');
+            if (path.classList.contains('level-middle')) classes.push('level-middle');
+            if (path.classList.contains('level-weak')) classes.push('level-weak');
+            if (path.classList.contains('active')) classes.push('active');
+            state[id] = classes;
+          }
+        }
+      });
+      localStorage.setItem('quranHeartState', JSON.stringify(state));
+    }
+
+    // Load state from localStorage
+    function loadState() {
+      const savedState = localStorage.getItem('quranHeartState');
+      if (savedState) {
+        try {
+          const state = JSON.parse(savedState);
+          groups.forEach(group => {
+            const paths = group.querySelectorAll('.section');
+            if (paths.length > 0) {
+              const path = paths[0];
+              const id = path.id;
+              if (id && state[id]) {
+                paths.forEach(p => {
+                  // Remove all classes first
+                  p.classList.remove('level-good', 'level-middle', 'level-weak', 'active');
+                  // Apply saved classes
+                  state[id].forEach(cls => p.classList.add(cls));
+                });
+              }
+            }
+          });
+        } catch (e) {
+          console.error('Error loading saved state:', e);
+        }
+      }
+    }
+
     // Level button click handlers
     Object.keys(levelButtons).forEach(level => {
       levelButtons[level].addEventListener('click', () => {
@@ -63,8 +111,14 @@ fetch('./heart.svg')
             p.classList.toggle('active', !isActive);
           });
         }
+
+        // Save state after each click
+        saveState();
       });
     });
+
+    // Load saved state after setting up event handlers
+    loadState();
 
     // Download functionality
     const downloadDesktop = document.getElementById('download-desktop');
