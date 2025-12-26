@@ -239,3 +239,119 @@ svg {
   }
 }
 
+/* Memorization Level Buttons */
+.level-buttons {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 100;
+}
+
+.level-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: rgba(34, 40, 49, 0.85);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.level-btn:hover {
+  background-color: rgba(34, 40, 49, 0.95);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.level-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.level-btn svg {
+  color: #ffffff;
+  width: 24px;
+  height: 24px;
+}
+
+/* Active level button */
+.level-btn.active {
+  border-width: 3px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+#level-good.active {
+  border-color: #4caf50;
+  background-color: rgba(76, 175, 80, 0.2);
+}
+
+#level-good.active svg {
+  color: #4caf50;
+}
+
+#level-middle.active {
+  border-color: #ffc107;
+  background-color: rgba(255, 193, 7, 0.2);
+}
+
+#level-middle.active svg {
+  color: #ffc107;
+}
+
+#level-weak.active {
+  border-color: #f44336;
+  background-color: rgba(244, 67, 54, 0.2);
+}
+
+#level-weak.active svg {
+  color: #f44336;
+}
+
+/* Memorization Level Colors for Sections */
+.section.level-good {
+  fill: #4caf50 !important;
+}
+
+.section.level-middle {
+  fill: #ffc107 !important;
+}
+
+.section.level-weak {
+  fill: #f44336 !important;
+}
+
+/* Text color adjustments for colored sections */
+.section.level-good + .section-text,
+.section.level-middle + .section-text,
+.section.level-weak + .section-text {
+  fill: #ffffff;
+}
+
+/* Responsive adjustments for level buttons */
+@media (max-width: 768px) {
+  .level-buttons {
+    bottom: 15px;
+    right: 15px;
+    gap: 10px;
+  }
+
+  .level-btn {
+    width: 45px;
+    height: 45px;
+  }
+
+  .level-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
