@@ -1,3 +1,15 @@
+/* =========================
+   Theme Variables
+========================= */
+:root {
+  --bg-color: #222831;
+  --surah-color: #ffffff;
+  --text-color: #000000;
+  --surah-active-color: #e63946;
+  --text-active-color: #ffffff;
+  --stats-number-color: #e63946;
+}
+
 /* Reset */
 * {
   margin: 0;
@@ -6,12 +18,164 @@
 }
 
 /* Page background */
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
-  background-color: #222831;
-  font-family: Arial, sans-serif;
+  background-color: var(--bg-color);
   overflow: hidden;
+}
+
+/* =========================
+   Theme Controls
+========================= */
+.theme-controls {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 200;
+}
+
+.theme-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: rgba(34, 40, 49, 0.85);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Theme Panel */
+.theme-panel {
+  position: fixed;
+  top: 80px;
+  left: 20px;
+  background-color: #2d3440;
+  padding: 16px;
+  border-radius: 14px;
+  width: 220px;
+  display: none;
+  z-index: 200;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.theme-panel.active {
+  display: block;
+}
+
+.theme-panel label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: #ffffff;
+}
+
+.theme-panel input {
+  width: 100%;
+  height: 32px;
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+
+/* =========================
+   Statistics Panel
+========================= */
+.stats-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: rgba(34, 40, 49, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  z-index: 100;
+  width: 220px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  font-family: "Tajawal", sans-serif;
+  direction: rtl;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.stat-label {
+  color: #eeeeee;
+  font-weight: 500;
+}
+
+.stat-value {
+  color: var(--stats-number-color);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 15px;
+  margin-bottom: 8px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background-color: var(--stats-number-color);
+  border-radius: 4px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-percentage {
+  text-align: center;
+  font-size: 13px;
+  color: #aaaaaa;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.reset-btn {
+  width: 100%;
+  padding: 8px;
+  background-color: rgba(230, 57, 70, 0.15);
+  border: 1px solid rgba(230, 57, 70, 0.3);
+  border-radius: 6px;
+  color: #ffadb3;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.reset-btn:hover {
+  background-color: rgba(230, 57, 70, 0.3);
+  border-color: rgba(230, 57, 70, 0.5);
+  color: #ffffff;
+}
+
+/* Responsive stats */
+@media (max-width: 768px) {
+  .stats-container {
+    width: 180px;
+    padding: 15px;
+    top: 15px;
+    right: 15px;
+  }
 }
 
 /* Center SVG */
@@ -33,30 +197,18 @@ svg {
 
 /* Heart sections */
 .section {
-  fill: #ffffff;
+  fill: var(--surah-color);
   cursor: pointer;
   transition: fill 0.25s ease;
 }
 
-/* On click */
 .section.active {
-  fill: #e63946;
+  fill: var(--surah-active-color);
 }
 
-.section {
-  fill: #ffffff;
-  cursor: pointer;
-  transition: fill 0.25s ease;
-}
-
-/* لون الباث لما يتفعل */
-.section.active {
-  fill: #e63946;
-}
-
-/* شكل التيكست */
+/* Text */
 .section-text {
-  fill: #000000;
+  fill: var(--text-color);
   font-size: 14px;
   font-weight: bold;
   pointer-events: none;
@@ -64,9 +216,8 @@ svg {
   transition: fill 0.25s ease;
 }
 
-/* لما الباث يبقى active → التيكست أبيض */
 .section.active + .section-text {
-  fill: #ffffff;
+  fill: var(--text-active-color);
 }
 
 /* Download Buttons */
@@ -80,7 +231,7 @@ svg {
   z-index: 100;
 }
 
-.download-btn {
+.download-btn, .theme-btn {
   width: 50px;
   height: 50px;
   border-radius: 25px;
@@ -95,14 +246,14 @@ svg {
   backdrop-filter: blur(10px);
 }
 
-.download-btn:hover {
+.download-btn:hover, .theme-btn:hover  {
   background-color: rgba(34, 40, 49, 0.95);
   border-color: rgba(255, 255, 255, 0.3);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
   transform: translateY(-2px);
 }
 
-.download-btn:active {
+.download-btn:active, .theme-btn:active {
   transform: translateY(0);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
@@ -111,6 +262,51 @@ svg {
   color: #ffffff;
   width: 24px;
   height: 24px;
+}
+
+/* Zoom Controls */
+.zoom-controls {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 100;
+}
+
+.zoom-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: rgba(34, 40, 49, 0.85);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  color: #fff;
+}
+
+.zoom-btn:hover {
+  background-color: rgba(34, 40, 49, 0.95);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.zoom-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.zoom-btn svg {
+  width: 24px;
+  height: 24px;
+  color: #ffffff;
 }
 
 /* Modal */
@@ -174,7 +370,7 @@ svg {
 
 .input-group input:focus {
   outline: none;
-  border-color: #e63946;
+  border-color: var(--surah-active-color);
   background-color: rgba(34, 40, 49, 0.8);
 }
 
@@ -206,7 +402,7 @@ svg {
 }
 
 .download-btn-primary {
-  background-color: #e63946;
+  background-color: var(--surah-active-color);
   color: #ffffff;
 }
 
@@ -223,7 +419,14 @@ svg {
     gap: 10px;
   }
 
-  .download-btn {
+  .zoom-controls {
+    bottom: 15px;
+    right: 15px;
+    gap: 10px;
+  }
+
+  .download-btn,
+  .zoom-btn {
     width: 45px;
     height: 45px;
   }
@@ -239,3 +442,88 @@ svg {
   }
 }
 
+/* =========================
+   Theme Panel (Arabic)
+========================= */
+.theme-panel {
+  position: fixed;
+  top: 80px;
+  left: 20px;
+  background: linear-gradient(180deg, #2d3440, #252b36);
+  padding: 18px 16px;
+  border-radius: 18px;
+  width: 240px;
+  display: none;
+  z-index: 200;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  direction: rtl;
+  font-family: "Tajawal", sans-serif;
+}
+
+.theme-panel.active {
+  display: block;
+  animation: panelFadeIn 0.25s ease-out;
+}
+
+/* Smooth entrance */
+@keyframes panelFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Labels */
+.theme-panel label {
+  display: block;
+  margin-top: 14px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #f1f1f1;
+  line-height: 1.4;
+}
+
+/* First label spacing fix */
+.theme-panel label:first-child {
+  margin-top: 0;
+}
+
+/* Color Inputs */
+.theme-panel input[type="color"] {
+  width: 100%;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: rgba(34, 40, 49, 0.7);
+  cursor: pointer;
+  padding: 4px;
+  transition: all 0.25s ease;
+}
+
+/* Hover + Focus */
+.theme-panel input[type="color"]:hover,
+.theme-panel input[type="color"]:focus {
+  border-color: var(--surah-active-color);
+  box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.25);
+  outline: none;
+}
+
+/* Small separation line (optional luxury touch) */
+.theme-panel label:not(:first-child)::before {
+  content: "";
+  display: block;
+  height: 1px;
+  margin: 12px 0 10px;
+  background: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 255, 255, 0)
+  );
+}
