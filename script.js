@@ -244,8 +244,6 @@ fetch("./heart.svg")
       "stat-percentage"
     ).textContent =
       `تم حفظ ${ayatProgress}% من القرآن الكريم والمتبقي ${100 - ayatProgress}%`;
-    
-    console.log(completedAyat)
   }
 
     let scale = 1;
